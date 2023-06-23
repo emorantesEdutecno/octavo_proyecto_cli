@@ -33,18 +33,18 @@
             </div>
             <div id="seccionIngreso">
                 <label for="txtIdIngresado">Ingrese Id:</label>
-                <input type="text" id="txtIdIngresado" v-model="form.id"><br>
+                <input type="text" id="txtIdIngresado" v-model="form.identificador"><br>
                 <label for="txtNombreIngresado">Ingrese Nombre:</label>
-                <input type="text" id="txtNombreIngresado" v-model="form.name"><br>
+                <input type="text" id="txtNombreIngresado" v-model="form.nombre"><br>
                 <label for="txtPrecioIngresado">Ingrese Precio:</label>
-                <input type="text" id="txtPrecioIngresado" v-model="form.price" ><br>
+                <input type="text" id="txtPrecioIngresado" v-model="form.precio" ><br>
                 <input type="submit" value="Enviar" v-on:click.prevent="guardarRefresco">
             </div>
         <hr>
         <p>Datos del form</p>
-        <p>id: {{  form.id }}</p>
-        <p>nombre: {{  form.name }}</p>
-        <p>precio: {{  form.price }}</p>
+        <p>id: {{  form.identificador }}</p>
+        <p>nombre: {{  form.nombre }}</p>
+        <p>precio: {{  form.precio }}</p>
     </div>
 </template>
 
@@ -74,9 +74,9 @@ export default{
                 {id:4, name:'Fanta', price: 1100}
             ],
             form:{
-                id:'',
-                name:'',
-                price:0,
+                identificador:'',
+                nombre:'',
+                precio:0,
             },
         }
     },
@@ -89,12 +89,17 @@ export default{
         },
         guardarRefresco:function(){
             //cambiamos a numero el price del modelo de datos
-            this.form.price = Number(this.form.price);
-            this.productos.push(this.form);
+            this.form.precio = Number(this.form.precio);
+            let objetoEnviar = {
+                id: this.form.identificador,
+                name: this.form.nombre,
+                price: this.form.precio
+            };
+            this.productos.push(objetoEnviar);
             // limpiamos para proxima insercion
-            this.form.id='';
-            this.form.name='';
-            this.form.price='';
+            // this.form.id='';
+            // this.form.name='';
+            // this.form.price='';
         },
     },
     computed:{
